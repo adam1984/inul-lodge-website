@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const links = [
+  {
+    url: "https://pglcambs.org.uk/",
+    title: "Provincial Grand Lodge of Cambridgeshire",
+    description: "The governing body of Freemasonry in Cambridgeshire, overseeing 34 Lodges and 14 Royal Arch Chapters across the Province.",
+  },
+  {
+    url: "https://www.ugle.org.uk/",
+    title: "United Grand Lodge of England",
+    description: "The governing body of English Freemasonry, founded in 1717 and one of the oldest Masonic grand lodges in the world.",
+  },
+  {
+    url: "https://www.ugle.org.uk/become-freemason/universities-scheme",
+    title: "The Universities Scheme",
+    description: "The UGLE Universities Scheme enables students and young people to join Freemasonry at university lodges across England and Wales.",
+  },
+];
+---
+<BaseLayout title="Links" description="Useful links for Isaac Newton University Lodge No. 859.">
+
+  <div class="page-header">
+    <h1>Useful Links</h1>
+    <p>External resources and affiliated organisations</p>
+  </div>
+
+  <div class="content-section">
+    <ul class="links-list">
+      {links.map(link => (
+        <li class="link-card">
+          <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-anchor">
+            <div class="link-text">
+              <span class="link-title">{link.title}</span>
+              <span class="link-desc">{link.description}</span>
+              <span class="link-url">{link.url}</span>
+            </div>
+            <span class="link-arrow" aria-hidden="true">&#8599;</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+</BaseLayout>
+
+<style>
+  .links-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .link-card {
+    background: var(--white);
+    border: 1px solid #e0ddd5;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .link-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    border-color: var(--cambridge-dark);
+  }
+
+  .link-anchor {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem 1.75rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .link-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .link-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    color: var(--navy);
+    letter-spacing: 0.04em;
+  }
+
+  .link-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  .link-url {
+    font-size: 0.78rem;
+    color: var(--cambridge-dark);
+    letter-spacing: 0.02em;
+  }
+
+  .link-arrow {
+    font-size: 1.5rem;
+    color: var(--cambridge-dark);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+
+  .link-card:hover .link-arrow { transform: translate(2px, -2px); }
+</style>
