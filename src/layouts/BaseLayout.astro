@@ -21,7 +21,9 @@ const currentPath = Astro.url.pathname;
 <body>
   <header>
     <nav>
-      <a href="/" class="nav-brand">INUL No. 859</a>
+      <a href="/" class="nav-brand">
+        <img src="/inul-crest.jpg" alt="Isaac Newton University Lodge" class="nav-crest" />
+      </a>
       <input type="checkbox" id="nav-toggle" hidden />
       <label for="nav-toggle" class="nav-hamburger" aria-label="Toggle navigation">&#9776;</label>
       <ul class="nav-links">
@@ -40,7 +42,6 @@ const currentPath = Astro.url.pathname;
 
   <footer>
     <div class="footer-inner">
-      <img src="/square-compasses.svg" alt="Square and Compasses" class="footer-symbol" />
       <p class="footer-name">Isaac Newton University Lodge</p>
       <p class="footer-sub">of Ancient, Free and Accepted Masons &bull; No. 859</p>
       <p class="footer-copy">&copy; {new Date().getFullYear()} Isaac Newton University Lodge No. 859. All rights reserved.</p>
@@ -82,11 +83,12 @@ const currentPath = Astro.url.pathname;
 
   /* NAV */
   header {
-    background: var(--navy);
+    background: var(--white);
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-bottom: 1px solid #e0ddd5;
   }
 
   nav {
@@ -99,13 +101,11 @@ const currentPath = Astro.url.pathname;
     height: 64px;
   }
 
-  .nav-brand {
-    font-family: var(--font-heading);
-    color: var(--gold);
-    text-decoration: none;
-    font-size: 1.1rem;
-    letter-spacing: 0.05em;
-    font-weight: 600;
+  .nav-brand { text-decoration: none; display: flex; align-items: center; }
+
+  .nav-crest {
+    height: 48px;
+    width: auto;
   }
 
   .nav-links {
@@ -115,7 +115,7 @@ const currentPath = Astro.url.pathname;
   }
 
   .nav-links a {
-    color: var(--white);
+    color: var(--text);
     text-decoration: none;
     font-family: var(--font-heading);
     font-size: 0.85rem;
@@ -127,13 +127,13 @@ const currentPath = Astro.url.pathname;
   }
 
   .nav-links a:hover,
-  .nav-links a.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .nav-links a.active { color: var(--navy); border-bottom-color: var(--navy); }
 
-  .nav-links .members-link { color: var(--cambridge-blue); }
+  .nav-links .members-link { color: var(--cambridge-dark); }
   .nav-links .members-link:hover,
-  .nav-links .members-link.active { color: var(--gold); }
+  .nav-links .members-link.active { color: var(--navy); border-bottom-color: var(--navy); }
 
-  .nav-hamburger { display: none; cursor: pointer; color: var(--white); font-size: 1.5rem; }
+  .nav-hamburger { display: none; cursor: pointer; color: var(--text); font-size: 1.5rem; }
 
   @media (max-width: 700px) {
     .nav-hamburger { display: block; }
@@ -142,7 +142,8 @@ const currentPath = Astro.url.pathname;
       position: absolute;
       top: 64px;
       left: 0; right: 0;
-      background: var(--navy);
+      background: var(--white);
+      border-bottom: 1px solid #e0ddd5;
       flex-direction: column;
       gap: 0;
       padding: 1rem 0;
@@ -190,14 +191,6 @@ const currentPath = Astro.url.pathname;
   }
 
   .footer-inner { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
-
-  .footer-symbol {
-    width: 48px;
-    height: 48px;
-    color: var(--gold);
-    filter: invert(75%) sepia(50%) saturate(500%) hue-rotate(5deg) brightness(95%);
-    margin-bottom: 0.5rem;
-  }
 
   .footer-name {
     font-family: var(--font-heading);
