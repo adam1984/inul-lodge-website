@@ -1,0 +1,211 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = "Isaac Newton University Lodge No. 859 — Ancient, Free and Accepted Masons, Cambridge" } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} | Isaac Newton University Lodge No. 859</title>
+  <meta name="description" content={description} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/jpeg" href="/inul-crest.jpg" />
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/" class="nav-brand">INUL No. 859</a>
+      <input type="checkbox" id="nav-toggle" hidden />
+      <label for="nav-toggle" class="nav-hamburger" aria-label="Toggle navigation">&#9776;</label>
+      <ul class="nav-links">
+        <li><a href="/" class={currentPath === '/' ? 'active' : ''}>Home</a></li>
+        <li><a href="/history" class={currentPath.startsWith('/history') ? 'active' : ''}>History</a></li>
+        <li><a href="/meetings" class={currentPath.startsWith('/meetings') ? 'active' : ''}>Meetings</a></li>
+        <li><a href="/contact" class={currentPath.startsWith('/contact') ? 'active' : ''}>Contact</a></li>
+        <li><a href="/members" class={currentPath.startsWith('/members') ? 'active members-link' : 'members-link'}>Members</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <img src="/square-compasses.svg" alt="Square and Compasses" class="footer-symbol" />
+      <p class="footer-name">Isaac Newton University Lodge</p>
+      <p class="footer-sub">of Ancient, Free and Accepted Masons &bull; No. 859</p>
+      <p class="footer-copy">&copy; {new Date().getFullYear()} Isaac Newton University Lodge No. 859. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style is:global>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cambridge-blue: #8EE8D8;
+    --cambridge-dark: #5dbdad;
+    --navy: #1a2744;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --white: #ffffff;
+    --off-white: #f8f5ef;
+    --text: #2c2c2c;
+    --text-muted: #666;
+    --font-display: 'Cinzel Decorative', serif;
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Lato', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text);
+    background: var(--off-white);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  main { flex: 1; }
+
+  /* NAV */
+  header {
+    background: var(--navy);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  nav {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-brand {
+    font-family: var(--font-heading);
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  .nav-links .members-link { color: var(--cambridge-blue); }
+  .nav-links .members-link:hover,
+  .nav-links .members-link.active { color: var(--gold); }
+
+  .nav-hamburger { display: none; cursor: pointer; color: var(--white); font-size: 1.5rem; }
+
+  @media (max-width: 700px) {
+    .nav-hamburger { display: block; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 64px;
+      left: 0; right: 0;
+      background: var(--navy);
+      flex-direction: column;
+      gap: 0;
+      padding: 1rem 0;
+    }
+    #nav-toggle:checked ~ .nav-links { display: flex; }
+    .nav-links li { text-align: center; padding: 0.75rem; }
+  }
+
+  /* PAGE HEADINGS */
+  .page-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+
+  .page-header h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-header p {
+    font-family: var(--font-body);
+    color: rgba(255,255,255,0.7);
+    font-size: 1rem;
+  }
+
+  /* CONTENT */
+  .content-section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    margin-top: auto;
+  }
+
+  .footer-inner { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+
+  .footer-symbol {
+    width: 48px;
+    height: 48px;
+    color: var(--gold);
+    filter: invert(75%) sepia(50%) saturate(500%) hue-rotate(5deg) brightness(95%);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-name {
+    font-family: var(--font-heading);
+    color: var(--gold);
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  .footer-sub { font-size: 0.85rem; }
+  .footer-copy { font-size: 0.75rem; margin-top: 0.5rem; }
+</style>

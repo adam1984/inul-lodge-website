@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Members" description="Members area — Isaac Newton University Lodge No. 859.">
+
+  <div class="page-header">
+    <h1>Members Area</h1>
+    <p>Welcome, Brother</p>
+  </div>
+
+  <div class="content-section" id="members-content" style="display:none">
+
+    <div class="members-welcome">
+      <p>
+        Welcome to the members area of Isaac Newton University Lodge No. 859.
+        This section is for current subscribing members of the lodge.
+      </p>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card">
+        <h3>Summonses &amp; Agendas</h3>
+        <p>Meeting summonses and agendas will be made available here ahead of each meeting.</p>
+      </div>
+      <div class="card">
+        <h3>Minutes</h3>
+        <p>Confirmed minutes of previous meetings will be accessible in this section.</p>
+      </div>
+      <div class="card">
+        <h3>Lodge Officers</h3>
+        <p>Current lodge officers and contact details for the year.</p>
+      </div>
+      <div class="card">
+        <h3>Resources</h3>
+        <p>Ritual workings, lodge by-laws, and other members' resources.</p>
+      </div>
+    </div>
+
+    <div class="logout-wrap">
+      <button id="logout-btn" class="logout-btn">Log Out</button>
+    </div>
+
+  </div>
+
+</BaseLayout>
+
+<script>
+  const content = document.getElementById('members-content')!;
+  const logoutBtn = document.getElementById('logout-btn')!;
+
+  if (sessionStorage.getItem('inul-member-auth') !== 'true') {
+    window.location.href = '/members';
+  } else {
+    content.style.display = 'block';
+  }
+
+  logoutBtn.addEventListener('click', () => {
+    sessionStorage.removeItem('inul-member-auth');
+    window.location.href = '/members';
+  });
+</script>
+
+<style>
+  .members-welcome {
+    background: var(--white);
+    border-left: 4px solid var(--cambridge-blue);
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .card {
+    background: var(--white);
+    border: 1px solid #e0ddd5;
+    border-radius: 6px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .card h3 {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--navy);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .logout-wrap { text-align: right; }
+
+  .logout-btn {
+    padding: 0.6rem 1.5rem;
+    background: transparent;
+    border: 1px solid var(--navy);
+    color: var(--navy);
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .logout-btn:hover { background: var(--navy); color: var(--white); }
+</style>

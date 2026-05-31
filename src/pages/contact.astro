@@ -1,0 +1,194 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Contact" description="Contact Isaac Newton University Lodge No. 859.">
+
+  <div class="page-header">
+    <h1>Contact Us</h1>
+    <p>Get in touch with Isaac Newton University Lodge</p>
+  </div>
+
+  <div class="content-section">
+
+    <div class="contact-grid">
+
+      <div class="contact-info">
+        <h2>About the Lodge</h2>
+        <p>
+          Isaac Newton University Lodge No. 859 meets at Freemasons' Hall, Bateman Street,
+          Cambridge. Whether you are a visiting Mason, a prospective candidate, or simply
+          wish to learn more about Freemasonry, we welcome your enquiry.
+        </p>
+        <div class="info-block">
+          <h3>Meeting Place</h3>
+          <address>
+            Freemasons' Hall<br />
+            Bateman Street<br />
+            Cambridge<br />
+            CB2 1LU
+          </address>
+        </div>
+        <div class="info-block">
+          <h3>Lodge Number</h3>
+          <p>No. 859</p>
+        </div>
+        <div class="info-block">
+          <h3>Province</h3>
+          <p>Cambridgeshire</p>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <h2>Send a Message</h2>
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="field">
+            <label for="name">Full Name <span class="required">*</span></label>
+            <input type="text" id="name" name="name" required placeholder="Your full name" />
+          </div>
+          <div class="field">
+            <label for="email">Email Address <span class="required">*</span></label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com" />
+          </div>
+          <div class="field">
+            <label for="subject">Subject <span class="required">*</span></label>
+            <select id="subject" name="subject" required>
+              <option value="" disabled selected>Please select…</option>
+              <option value="general">General Enquiry</option>
+              <option value="visiting">Visiting Mason</option>
+              <option value="joining">Joining / Initiation</option>
+              <option value="dining">Dining Reservation</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">Message <span class="required">*</span></label>
+            <textarea id="message" name="message" rows="6" required placeholder="Your message…"></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message</button>
+          <p class="form-note" id="form-status"></p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const status = document.getElementById('form-status')!;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Placeholder: form submission to be wired up with a backend/service later
+    status.textContent = 'Thank you for your message. We will be in touch shortly.';
+    status.style.color = '#2a7a4e';
+    form.reset();
+  });
+</script>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  @media (max-width: 700px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  .contact-info h2, .contact-form-wrap h2 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--navy);
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+  }
+
+  .contact-info > p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .info-block {
+    border-top: 1px solid #e0ddd5;
+    padding: 0.9rem 0;
+  }
+
+  .info-block h3 {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    color: var(--cambridge-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+
+  .info-block p, .info-block address {
+    font-size: 0.95rem;
+    color: var(--text);
+    font-style: normal;
+    line-height: 1.7;
+  }
+
+  /* FORM */
+  .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+
+  .field { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  .field label {
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+
+  .required { color: #c0392b; }
+
+  .field input,
+  .field select,
+  .field textarea {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid #c8c4ba;
+    border-radius: 3px;
+    background: var(--white);
+    color: var(--text);
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--cambridge-dark);
+    box-shadow: 0 0 0 3px rgba(142,232,216,0.3);
+  }
+
+  .field textarea { resize: vertical; }
+
+  .submit-btn {
+    padding: 0.8rem 2rem;
+    background: var(--navy);
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    align-self: flex-start;
+  }
+
+  .submit-btn:hover { background: var(--gold); color: var(--navy); }
+
+  .form-note { font-size: 0.9rem; min-height: 1.2em; }
+</style>
