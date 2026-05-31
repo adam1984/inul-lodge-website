@@ -1,37 +1,89 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+// Returns the nth occurrence of a weekday in a given month/year.
+// weekday: 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
+// n: 1=first, 2=second, -1=last
+function getNthWeekday(year: number, month: number, weekday: number, n: number): Date {
+  if (n > 0) {
+    const date = new Date(year, month - 1, 1);
+    let count = 0;
+    while (date.getMonth() === month - 1) {
+      if (date.getDay() === weekday) { count++; if (count === n) return new Date(date); }
+      date.setDate(date.getDate() + 1);
+    }
+  } else {
+    const date = new Date(year, month, 0); // last day of month
+    while (date.getDay() !== weekday) date.setDate(date.getDate() - 1);
+    return new Date(date);
+  }
+  throw new Error('Date not found');
+}
+
+function fmt(date: Date): string {
+  return date.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+// 2025/2026 academic year dates
+// weekdays: 2=Tuesday, 6=Saturday
+const TUE = 2, SAT = 6;
+
 const terms = [
   {
     name: "Michaelmas Term",
-    color: "#8EE8D8",
+    year: "2025",
     meetings: [
-      { label: "Installation Meeting", rule: "Last Tuesday in October", note: "The annual Installation of the Worshipful Master." },
-      { label: "Regular Meeting", rule: "First Saturday in December" },
-    ]
+      {
+        label: "Installation Meeting",
+        rule: "Last Tuesday in October",
+        date: fmt(getNthWeekday(2025, 10, TUE, -1)),
+        note: "The annual Installation of the Worshipful Master.",
+      },
+      {
+        label: "Regular Meeting",
+        rule: "First Saturday in December",
+        date: fmt(getNthWeekday(2025, 12, SAT, 1)),
+      },
+    ],
   },
   {
     name: "Lent Term",
-    color: "#8EE8D8",
+    year: "2026",
     meetings: [
-      { label: "Regular Meeting", rule: "Last Tuesday in January" },
-      { label: "Regular Meeting", rule: "First Saturday in March" },
-    ]
+      {
+        label: "Regular Meeting",
+        rule: "Last Tuesday in January",
+        date: fmt(getNthWeekday(2026, 1, TUE, -1)),
+      },
+      {
+        label: "Regular Meeting",
+        rule: "First Saturday in March",
+        date: fmt(getNthWeekday(2026, 3, SAT, 1)),
+      },
+    ],
   },
   {
     name: "Easter Term",
-    color: "#8EE8D8",
+    year: "2026",
     meetings: [
-      { label: "Regular Meeting", rule: "Last Saturday in April" },
-      { label: "Regular Meeting", rule: "Second Tuesday in June" },
-    ]
+      {
+        label: "Regular Meeting",
+        rule: "Last Saturday in April",
+        date: fmt(getNthWeekday(2026, 4, SAT, -1)),
+      },
+      {
+        label: "Regular Meeting",
+        rule: "Second Tuesday in June",
+        date: fmt(getNthWeekday(2026, 6, TUE, 2)),
+      },
+    ],
   },
 ];
 ---
 <BaseLayout title="Meetings" description="Meeting dates for Isaac Newton University Lodge No. 859.">
 
   <div class="page-header">
-    <h1>Meetings</h1>
+    <h1>Meetings 2025 / 2026</h1>
     <p>We meet six times per year across the three University of Cambridge terms</p>
   </div>
 
@@ -51,7 +103,10 @@ const terms = [
           <ul class="meeting-list">
             {term.meetings.map(meeting => (
               <li class="meeting-item">
-                <div class="meeting-rule">{meeting.rule}</div>
+                <div class="meeting-row">
+                  <span class="meeting-rule">{meeting.rule}</span>
+                  <span class="meeting-date">{meeting.date}</span>
+                </div>
                 <div class="meeting-label">{meeting.label}</div>
                 {meeting.note && <p class="meeting-note">{meeting.note}</p>}
               </li>
@@ -102,7 +157,7 @@ const terms = [
 
   .terms-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: 1fr;
     gap: 1.5rem;
     margin-bottom: 3rem;
   }
@@ -133,12 +188,26 @@ const terms = [
   .meeting-item { border-bottom: 1px solid #f0ede6; padding-bottom: 1rem; }
   .meeting-item:last-child { border-bottom: none; padding-bottom: 0; }
 
+  .meeting-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.2rem;
+  }
+
   .meeting-rule {
     font-family: var(--font-heading);
     font-size: 0.95rem;
     color: var(--navy);
     font-weight: 600;
-    margin-bottom: 0.2rem;
+  }
+
+  .meeting-date {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--cambridge-dark);
+    font-weight: 700;
   }
 
   .meeting-label {
