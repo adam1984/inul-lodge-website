@@ -33,7 +33,7 @@ const currentPath = Astro.url.pathname;
         <li><a href="/meetings" class={currentPath.startsWith('/meetings') ? 'active' : ''}>Meetings</a></li>
         <li><a href="/contact" class={currentPath.startsWith('/contact') ? 'active' : ''}>Contact</a></li>
         <li><a href="/links" class={currentPath.startsWith('/links') ? 'active' : ''}>Links</a></li>
-        <li><a href="/cufs" class={currentPath.startsWith('/cufs') ? 'active' : ''}>CUFS</a></li>
+        <li><a href="/cufs" class={currentPath.startsWith('/cufs') ? 'active members-link' : 'members-link'}>CUFS</a></li>
         <li><a href="/members" class={currentPath.startsWith('/members') ? 'active members-link' : 'members-link'}>Members</a></li>
       </ul>
     </nav>
