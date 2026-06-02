@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="CUFS" description="Cambridge University Freemasons Society — affiliated with Isaac Newton University Lodge No. 859.">
+
+  <div class="page-header">
+    <h1>Cambridge University Freemasons Society</h1>
+    <p>CUFS — bringing Freemasonry to the University of Cambridge</p>
+  </div>
+
+  <div class="content-section">
+
+    <div class="cufs-intro">
+      <p>
+        The Cambridge University Freemasons Society (CUFS) is the student society affiliated
+        with Isaac Newton University Lodge No. 859. It provides a welcoming environment for
+        current students and members of the University to learn more about Freemasonry, meet
+        like-minded people, and take their first steps into the Craft.
+      </p>
+    </div>
+
+    <div class="holding-block">
+      <h2>About CUFS</h2>
+      <p>
+        Further information about the society, its events, and how to get involved will be
+        published here shortly. In the meantime, please visit our Cambridge SU page or follow
+        us on Instagram (<strong>@cu_freemasonry_society</strong>) for the latest updates.
+      </p>
+    </div>
+
+    <div class="holding-block">
+      <h2>Interested in Joining?</h2>
+      <p>
+        Whether you are a student curious about Freemasonry or an existing Mason new to
+        Cambridge, CUFS is the perfect starting point. Details of upcoming events and how
+        to register your interest will be added here in due course.
+      </p>
+      <p>
+        You may also wish to explore the
+        <a href="/links" class="inline-link">UGLE Universities Scheme</a>,
+        which supports students joining Freemasonry at universities across England and Wales.
+      </p>
+    </div>
+
+    <a href="https://www.cambridgesu.co.uk/organisation/23948/" target="_blank" rel="noopener noreferrer" class="cufs-link-card">
+      <div class="cufs-link-text">
+        <span class="cufs-link-title">CUFS on Cambridge SU</span>
+        <span class="cufs-link-desc">Visit our official Cambridge Students' Union page to find out more and join the society.</span>
+        <span class="cufs-link-url">cambridgesu.co.uk/organisation/23948</span>
+      </div>
+      <span class="cufs-link-arrow" aria-hidden="true">&#8599;</span>
+    </a>
+
+  </div>
+
+</BaseLayout>
+
+<style>
+  .cufs-intro {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--white);
+    border-left: 4px solid var(--cambridge-blue);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .holding-block {
+    background: var(--white);
+    border: 1px solid #e0ddd5;
+    border-radius: 6px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .holding-block h2 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--navy);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.75rem;
+  }
+
+  .holding-block p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .inline-link {
+    color: var(--cambridge-dark);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .inline-link:hover { color: var(--navy); }
+
+  .cufs-link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem 1.75rem;
+    background: var(--white);
+    border: 1px solid #e0ddd5;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    text-decoration: none;
+    color: inherit;
+    margin-top: 2rem;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .cufs-link-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    border-color: var(--cambridge-dark);
+  }
+
+  .cufs-link-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .cufs-link-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    color: var(--navy);
+    letter-spacing: 0.04em;
+  }
+
+  .cufs-link-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  .cufs-link-url {
+    font-size: 0.78rem;
+    color: var(--cambridge-dark);
+  }
+
+  .cufs-link-arrow {
+    font-size: 1.5rem;
+    color: var(--cambridge-dark);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+
+  .cufs-link-card:hover .cufs-link-arrow { transform: translate(2px, -2px); }
+</style>
