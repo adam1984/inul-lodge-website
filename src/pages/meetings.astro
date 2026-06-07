@@ -90,7 +90,7 @@ const terms = [
   <div class="content-section">
 
     <p class="intro">
-      All meetings are held at <strong>Freemasons' Hall, Bateman Street, Cambridge</strong>.
+      All meetings are held at <a href="https://maps.google.com/?q=Freemasons+Hall,+Bateman+Street,+Cambridge,+CB2+1LU" target="_blank" rel="noopener noreferrer" class="map-link"><strong>Freemasons' Hall, Bateman Street, Cambridge</strong></a>.
       Meetings open at <strong>5pm</strong> and are followed by a Festive Board dinner.
     </p>
 
@@ -121,6 +121,13 @@ const terms = [
 </BaseLayout>
 
 <style>
+  .map-link {
+    color: var(--cambridge-dark);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .map-link:hover { color: var(--navy); }
+
   .intro {
     font-size: 1.05rem;
     line-height: 1.8;
