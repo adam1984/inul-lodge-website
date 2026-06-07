@@ -36,6 +36,9 @@ const currentPath = Astro.url.pathname;
         <li><a href="/cufs" class={currentPath.startsWith('/cufs') ? 'active members-link' : 'members-link'}>CUFS</a></li>
         <li><a href="/members" class={currentPath.startsWith('/members') ? 'active members-link' : 'members-link'}>Members</a></li>
       </ul>
+      <a href="https://www.cam.ac.uk" target="_blank" rel="noopener noreferrer" class="nav-cam-link" aria-label="University of Cambridge">
+        <img src="/cambridge-shield.svg" alt="University of Cambridge" class="nav-cam-crest" />
+      </a>
     </nav>
   </header>
 
@@ -107,6 +110,9 @@ const currentPath = Astro.url.pathname;
   .nav-brand { text-decoration: none; display: flex; align-items: center; gap: 0.6rem; }
 
   .nav-crest { height: 48px; width: auto; }
+
+  .nav-cam-link { display: flex; align-items: center; flex-shrink: 0; }
+  .nav-cam-crest { height: 48px; width: auto; }
 
   .nav-brand-text {
     font-family: var(--font-heading);
