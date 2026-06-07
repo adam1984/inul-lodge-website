@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <BaseLayout title="Home" description="Welcome to Isaac Newton University Lodge No. 859, Cambridge.">
 
   <section class="hero">
+    <div class="hero-overlay"></div>
     <div class="hero-inner">
       <h1 class="hero-title">Isaac Newton University Lodge</h1>
       <p class="hero-subtitle">of Ancient, Free and Accepted Masons</p>
@@ -32,18 +33,27 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <style>
   .hero {
-    background-color: #8EE8D8;
-    background-image:
-      radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.25) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 20%, rgba(26,39,68,0.08) 0%, transparent 50%);
+    position: relative;
     min-height: calc(100vh - 64px);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 4rem 1.5rem;
+    background-image: url('/bateman-st.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 39, 68, 0.55);
   }
 
   .hero-inner {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -54,35 +64,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .hero-title {
     font-family: var(--font-display);
     font-size: clamp(1.6rem, 4.5vw, 3rem);
-    color: var(--navy);
+    color: var(--white);
     letter-spacing: 0.04em;
     line-height: 1.2;
     max-width: 700px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
   }
 
   .hero-subtitle {
     font-family: var(--font-heading);
     font-size: clamp(0.95rem, 2.5vw, 1.3rem);
-    color: var(--navy);
-    opacity: 0.85;
+    color: rgba(255,255,255,0.9);
     letter-spacing: 0.06em;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
   }
 
   .hero-number {
     font-family: var(--font-heading);
     font-size: clamp(1.2rem, 3vw, 1.8rem);
-    color: var(--navy);
+    color: var(--white);
     font-weight: 700;
     letter-spacing: 0.1em;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
   }
 
   .hero-location {
     font-family: var(--font-heading);
     font-size: 0.9rem;
-    color: var(--navy);
-    opacity: 0.7;
+    color: rgba(255,255,255,0.75);
     letter-spacing: 0.2em;
     text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
   }
 
   .welcome {
